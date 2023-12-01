@@ -18,48 +18,71 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_location_on_24"/>
+                android:src="@drawable/ic_time_24"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phòng vinpearl"/>
+                android:text="Giờ mở cửa"/>
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="giá từ ...-...."/>
-        <RelativeLayout
+            android:text="Hôm nay mở cửa cả ngày"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:orientation="vertical"
+        android:background="@drawable/boder">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_local_dining_24"/>
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Gía trung bình: "
-                android:textSize="15sp"
-                android:layout_alignParentLeft="true"/>
-            <LinearLayout
-                android:id="@+id/btn_booking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="5dp"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/circle_btn">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="Đặt ngay"/>
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginLeft="3dp"
-                    android:src="@drawable/ic_booking_home_24"/>
-            </LinearLayout>
+                android:text="Ở đây có món gì"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Món Âu"/>
 
-        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:orientation="vertical"
+        android:background="@drawable/boder">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_local_dining_24"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Món ăn đặc sắc"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bò tái"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -80,69 +103,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Gioi thieu"/>
+                android:text="Giới thiệu"/>
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="discription"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:padding="5dp"
-        android:orientation="vertical"
-        android:background="@drawable/boder">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_hotel_24"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đặt phòng"/>
-        </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Để lại thông tin liên hệ:"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Họ và tên:"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Số điện thoại:"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lượng khách:"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
-
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="260dp"
-            android:text="Gửi đi"/>
     </LinearLayout>
 
 </LinearLayout>

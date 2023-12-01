@@ -32,9 +32,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DestinationAdapter destinationAdapter;
     private List<Destination> mdestinationList;
 
-    private static final int FRAGMENT_LOCATION = 0;
-    private static final int FRAGMENT_RESTAURANT = 1;
-    private static final int FRAGMENT_HOTEL= 2;
+    private static final int FRAGMENT_HOME = 0;
+    private static final int FRAGMENT_LOCATION = 1;
+    private static final int FRAGMENT_RESTAURANT = 2;
+    private static final int FRAGMENT_HOTEL= 3;
     private int currentFragment = FRAGMENT_LOCATION;
 
     @Override
@@ -115,18 +116,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigation_view.setNavigationItemSelectedListener(this);
 
-        replaceFragment(new LocationFragment());
-        navigation_view.getMenu().findItem(R.id.nav_location).setChecked(true);
+        replaceFragment(new HomeFragment());
+        navigation_view.getMenu().findItem(R.id.nav_home).setChecked(true);
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_location) {
+        if (id == R.id.nav_home) {
+            if (currentFragment != FRAGMENT_HOME) {
+                replaceFragment(new HomeFragment());
+                currentFragment = FRAGMENT_HOME;
+            }
+        } else if (id == R.id.nav_location) {
             if (currentFragment != FRAGMENT_LOCATION){
                 replaceFragment(new LocationFragment());
                 currentFragment = FRAGMENT_LOCATION;
             }
-
         } else if (id == R.id.nav_restaurant) {
             if (currentFragment != FRAGMENT_RESTAURANT){
                 replaceFragment(new RestaurantFragment());
