@@ -70,6 +70,7 @@
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
                 android:layout_weight="1"
+                android:onClick="onClickLocation"
                 android:src="@drawable/ic_location_on_24"/>
             <ImageView
                 android:id="@+id/btn_hotel"
@@ -77,6 +78,7 @@
                 android:layout_height="40dp"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
+                android:onClick="onClickHotel"
                 android:layout_weight="1"
                 android:src="@drawable/ic_hotel_24" />
             <ImageView
@@ -86,6 +88,7 @@
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
                 android:layout_weight="1"
+                android:onClick="onClickRestaurant"
                 android:src="@drawable/ic_restaurant_24"/>
         </LinearLayout>
 

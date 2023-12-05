@@ -16,11 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.example.travelapp.R;
-import com.example.travelapp.model.Destination;
-import com.example.travelapp.adapter.DestinationAdapter;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -29,8 +25,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigation_view;
     Toolbar toolbar;
     FrameLayout content_frame;
-    private DestinationAdapter destinationAdapter;
-    private List<Destination> mdestinationList;
 
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_LOCATION = 1;
@@ -67,7 +61,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void onClickRestaurant() {
         btn_hotel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { setClickColor(view);
+            public void onClick(View view) {
+                replaceFragment(new RestaurantFragment());
+                currentFragment = FRAGMENT_RESTAURANT;
+                setClickColor(view);
             }
         });
     }
@@ -76,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                replaceFragment(new HotelFragment());
+                currentFragment = FRAGMENT_HOTEL;
                 setClickColor(view);
             }
         });
@@ -85,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btn_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                replaceFragment(new LocationFragment());
+                currentFragment = FRAGMENT_LOCATION;
                 setClickColor(view);
             }
         });
