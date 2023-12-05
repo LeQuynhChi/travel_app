@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-
+    android:background="@color/item_color"
+    android:layout_marginBottom="7dp"
+    
     >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/bg_item"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <ImageView
@@ -19,23 +21,9 @@
             android:layout_height="150dp"
             android:scaleType="fitXY"
             android:src="@drawable/travel01"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="-2dp" />
+            />
 
-        <ImageView
-            android:id="@+id/myImageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/logo"
-            app:layout_editor_absoluteX="10dp"
-            app:layout_editor_absoluteY="110dp"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="104dp" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_marginBottom="@dimen/fab_margin"
@@ -44,6 +32,7 @@
         android:orientation="vertical"
         >
         <TextView
+            android:id="@+id/location_name"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,6 +50,7 @@
                 android:src="@drawable/ic_museum_24"
                 />
             <TextView
+                android:id="@+id/location_type"
                 android:textSize="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

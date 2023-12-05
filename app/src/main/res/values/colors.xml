@@ -6,4 +6,5 @@
     <color name="surf_blue">#00AAF8</color>
     <color name="orange_red">#F13B13</color>
     <color name="faint_gray">#F0ECE9</color>
+    <color name="item_color">#DDD5CF</color>
 </resources>
