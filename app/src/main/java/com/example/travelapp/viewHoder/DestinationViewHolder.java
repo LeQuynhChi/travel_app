@@ -20,5 +20,7 @@ public  class DestinationViewHolder extends RecyclerView.ViewHolder {
             super(itemView);
             textViewName = itemView.findViewById(R.id.location_name);
             textViewType = itemView.findViewById(R.id.location_type);
+            imageView = itemView.findViewById(R.id.bg_location_image);
+            textViewProvince = itemView.findViewById(R.id.location_province);
         }
     }
