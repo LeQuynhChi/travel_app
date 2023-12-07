@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,11 +16,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.example.travelapp.R;
-import com.example.travelapp.adapter.DestinationAdapter;
-import com.example.travelapp.adapter.OnItemClickListener;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     ImageView btn_location,btn_restaurant,btn_hotel;
     DrawerLayout drawer_layout;
@@ -62,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void onClickRestaurant() {
-        btn_restaurant.setOnClickListener(new View.OnClickListener() {
+        btn_hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 replaceFragment(new RestaurantFragment());
@@ -73,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void onClickHotel() {
-        btn_hotel.setOnClickListener(new View.OnClickListener() {
+        btn_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 replaceFragment(new HotelFragment());
@@ -176,25 +173,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = findViewById(R.id.toolbar);
         navigation_view = findViewById(R.id.navigation_view);
         content_frame = findViewById(R.id.content_frame);
-    }
-
-    @Override
-    public void onItemClick(String itemId) {
-        // Handle item click, e.g., open detailed view or perform an action
-        Intent intent = new Intent(this, DestinationDetailActivity.class);
-        intent.putExtra("id", itemId);
-        startActivity(intent);
-    }
-    public void onItemClickHotel(String itemId) {
-        // Handle item click, e.g., open detailed view or perform an action
-        Intent intent = new Intent(this, HotelDetailActivity.class);
-        intent.putExtra("id", itemId);
-        startActivity(intent);
-    }
-    public void onItemClickRestaurant(String itemId) {
-        // Handle item click, e.g., open detailed view or perform an action
-        Intent intent = new Intent(this, HotelDetailActivity.class);
-        intent.putExtra("id", itemId);
-        startActivity(intent);
     }
 }
