@@ -9,4 +9,6 @@ import retrofit2.http.GET;
 public interface RestApiService {
     @GET("destination/all")
     Call<Destination> getAllDestination();
+    @GET("destination/all")
+    Call<Destination> getProvinceVn();
 }
