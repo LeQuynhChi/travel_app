@@ -16,4 +16,5 @@
     <string name="restaurant">Restaurant</string>
     <string name="hotel">Hotel</string>
     <string name="logout">Logout</string>
+    <string name="title_activity_add_destination">AddDestinationActivity</string>
 </resources>
