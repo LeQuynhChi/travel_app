@@ -18,9 +18,9 @@ import com.example.travelapp.adapter.DestinationAdapter;
 import com.example.travelapp.model.Destination;
 import com.example.travelapp.network.RestApiService;
 import com.example.travelapp.network.RetrofitInstance;
-import com.example.travelapp.viewModel.DestinationViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,13 +31,12 @@ public class HomeFragment extends Fragment {
      RecyclerView recyclerView;
      DestinationAdapter adapter;
 
-     DestinationViewModel viewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = view.findViewById(R.id.data_home);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
         fetchListDestination();
         return view;
     }
@@ -49,7 +48,8 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<Destination>() {
             @Override
             public void onResponse(Call<Destination> call, Response<Destination> response) {
-                Destination destinationList = response.body();
+                adapter = new DestinationAdapter( getActivity(),response.body().getData());
+               recyclerView.setAdapter(adapter);
             }
             @Override
             public void onFailure(Call<Destination> call, Throwable t) {

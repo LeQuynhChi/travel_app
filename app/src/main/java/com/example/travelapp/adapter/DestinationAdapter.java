@@ -13,16 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.travelapp.R;
 import com.example.travelapp.model.Destination;
 import com.example.travelapp.viewHoder.DestinationViewHolder;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class DestinationAdapter extends RecyclerView.Adapter<DestinationViewHolder> {
-    private List<Destination> destinationList;
+    private List<Destination.Data> destinationList;
     private Context context;
 
     private LayoutInflater inflater;
 
-    public DestinationAdapter(Context context, List<Destination> destinationList) {
+    public DestinationAdapter(Context context, List<Destination.Data> destinationList) {
         this.context = context;
         this.destinationList = destinationList;
         this.inflater = LayoutInflater.from(context);
@@ -37,9 +38,12 @@ public class DestinationAdapter extends RecyclerView.Adapter<DestinationViewHold
 
     @Override
     public void onBindViewHolder(@NonNull DestinationViewHolder holder, int position) {
-        Destination item = destinationList.get(position);
-        holder.textViewType.setText("dsjgfs");
-        holder.textViewName.setText("jasj");
+        Destination.Data item = destinationList.get(position);
+        holder.textViewType.setText(item.getType());
+        holder.textViewName.setText(item.getName());
+        holder.textViewProvince.setText(item.getProvince());
+        String imageUrl = "https://trimmap-ohte.onrender.com/img/"+item.getImage();
+        Picasso.get().load(imageUrl).into(holder.imageView);
     }
 
     @Override
