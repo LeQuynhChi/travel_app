@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/LocationDetailImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
@@ -27,16 +28,19 @@
         android:layout_marginTop="5dp"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/locationDetailName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name location"
             android:textSize="25dp"/>
+
         <TextView
+            android:id="@+id/locationDetailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Location"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -223,11 +227,21 @@
         </LinearLayout>
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <TextView
+        android:id="@+id/locationDetailDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginRight="20dp" />-->
 
 </LinearLayout>

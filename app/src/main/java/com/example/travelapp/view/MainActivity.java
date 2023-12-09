@@ -181,8 +181,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onItemClick(String itemId) {
         // Handle item click, e.g., open detailed view or perform an action
-        Intent intent = new Intent(this, AddDestination.class);
-        intent.putExtra("ITEM_ID", itemId);
+        Intent intent = new Intent(this, DestinationDetailActivity.class);
+        intent.putExtra("id", itemId);
         startActivity(intent);
     }
 }
