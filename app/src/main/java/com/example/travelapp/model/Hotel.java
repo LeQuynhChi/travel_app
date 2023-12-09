@@ -1,24 +1,60 @@
 package com.example.travelapp.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class Hotel {
 
-    private String name;
-    private String province;
-    private String district;
-    private String description;
-    private String type;
-    private String image;
-    private int rate;
+    @SerializedName("holtels")
+    List<Hotel.Data> data;
 
-    public Hotel(String name, String province, String district, String description, String type, String image) {
-        this.name = name;
-        this.province = province;
-        this.district = district;
-        this.description = description;
-        this.type = type;
-        this.image = image;
-        this.rate = 0;
+    public Hotel(List<Data> data) {
+        this.data = data;
     }
+
+    public List<Data> getData() {
+        return data;
+    }
+
+    public void setData(List<Data> data) {
+        this.data = data;
+    }
+
+    public  static  class  Data {
+        @SerializedName("name")
+    private String name;
+        @SerializedName("province")
+
+    private String province;
+        @SerializedName("district")
+    private String district;
+        @SerializedName("description")
+    private String description;
+        @SerializedName("type")
+    private String type;
+        @SerializedName("image")
+    private String image;
+        @SerializedName("price")
+    private float price;
+
+        public Data(String name, String province, String district, String description, String type, String image, float price) {
+            this.name = name;
+            this.province = province;
+            this.district = district;
+            this.description = description;
+            this.type = type;
+            this.image = image;
+            this.price = price;
+        }
+
+        public String getPrice() {
+            return price + "đ";
+        }
+
+        public void setPrice(float price) {
+            this.price = price;
+        }
 
     public String getName() {
         return name;
@@ -67,12 +103,5 @@ public class Hotel {
     public void setImage(String image) {
         this.image = image;
     }
-
-    public int getRate() {
-        return rate;
-    }
-
-    public void setRate(int rate) {
-        this.rate = rate;
     }
 }

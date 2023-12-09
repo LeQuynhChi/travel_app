@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void onClickRestaurant() {
-        btn_hotel.setOnClickListener(new View.OnClickListener() {
+        btn_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 replaceFragment(new RestaurantFragment());
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void onClickHotel() {
-        btn_restaurant.setOnClickListener(new View.OnClickListener() {
+        btn_hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 replaceFragment(new HotelFragment());
