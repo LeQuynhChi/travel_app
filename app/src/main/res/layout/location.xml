@@ -44,7 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="price"
+                android:text="1.000.000d/ngày"
+                android:textColor="@color/orange_red"
                 android:textSize="15sp"
                 android:layout_alignParentLeft="true"/>
             <LinearLayout

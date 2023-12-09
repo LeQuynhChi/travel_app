@@ -39,19 +39,25 @@ public class Destination {
 
         private String image;
 
-        public Data(String name, String province, String district, String description, String type, String image) {
+
+        public Data(String id, String name, String type, String province, String district, String description, String image) {
+            this.id = id;
             this.name = name;
+            this.type = type;
             this.province = province;
             this.district = district;
             this.description = description;
-            this.type = type;
             this.image = image;
         }
 
-        public Data(String name, String type) {
-            this.name = name;
-            this.type = type;
+        public String getId() {
+            return id;
         }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
         public String getName() {
             return name;
         }

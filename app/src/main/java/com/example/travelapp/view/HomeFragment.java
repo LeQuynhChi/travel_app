@@ -48,8 +48,8 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<Destination>() {
             @Override
             public void onResponse(Call<Destination> call, Response<Destination> response) {
-                adapter = new DestinationAdapter(getActivity(),response.body().getData());
-               recyclerView.setAdapter(adapter);
+//                adapter = new DestinationAdapter(getActivity(),response.body().getData());
+//               recyclerView.setAdapter(adapter);
             }
             @Override
             public void onFailure(Call<Destination> call, Throwable t) {

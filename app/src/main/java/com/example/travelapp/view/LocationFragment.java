@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.travelapp.R;
 import com.example.travelapp.adapter.DestinationAdapter;
+import com.example.travelapp.adapter.OnItemClickListener;
 import com.example.travelapp.model.Destination;
 import com.example.travelapp.network.RestApiService;
 import com.example.travelapp.network.RetrofitInstance;
@@ -64,7 +65,7 @@ public class LocationFragment extends Fragment {
         call.enqueue(new Callback<Destination>() {
             @Override
             public void onResponse(Call<Destination> call, Response<Destination> response) {
-                adapter = new DestinationAdapter(getActivity(),response.body().getData());
+                adapter = new DestinationAdapter(getActivity(),response.body().getData(),(OnItemClickListener) requireActivity());
                 recyclerView.setAdapter(adapter);
             }
             @Override

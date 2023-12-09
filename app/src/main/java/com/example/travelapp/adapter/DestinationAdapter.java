@@ -22,11 +22,13 @@ public class DestinationAdapter extends RecyclerView.Adapter<DestinationViewHold
     private Context context;
 
     private LayoutInflater inflater;
+    private OnItemClickListener itemClickListener;
 
-    public DestinationAdapter(Context context, List<Destination.Data> destinationList) {
+    public DestinationAdapter(Context context, List<Destination.Data> destinationList ,  OnItemClickListener itemClickListener) {
         this.context = context;
         this.destinationList = destinationList;
         this.inflater = LayoutInflater.from(context);
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -38,12 +40,23 @@ public class DestinationAdapter extends RecyclerView.Adapter<DestinationViewHold
 
     @Override
     public void onBindViewHolder(@NonNull DestinationViewHolder holder, int position) {
-        Destination.Data item = destinationList.get(position);
+        final Destination.Data item = destinationList.get(position);
         holder.textViewType.setText(item.getType());
         holder.textViewName.setText(item.getName());
         holder.textViewProvince.setText(item.getProvince());
         String imageUrl = "https://trimmap-ohte.onrender.com/img/"+item.getImage();
         Picasso.get().load(imageUrl).into(holder.imageView);
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (itemClickListener != null) {
+                    itemClickListener.onItemClick(item.getId());
+                }
+            }
+        });
+
     }
 
     @Override
