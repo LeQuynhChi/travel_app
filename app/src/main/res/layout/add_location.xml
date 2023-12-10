@@ -75,7 +75,7 @@
                 />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editTextLocationDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -166,7 +166,6 @@
                     android:background="@drawable/boder"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-
                     android:layout_marginTop="16dp"/>
 
                 <Button
@@ -188,23 +187,38 @@
             android:orientation="vertical"
 
             >
+
             <Button
-                android:id="@+id/saveLocation"
+                android:onClick="saveData"
+                android:id="@+id/addLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:layout_marginBottom="12dp"
                 android:text="Lưu"
-                />
+                android:textSize="16dp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            >
+
+
+
             <Button
                 android:id="@+id/backAddLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
                 android:text="Thoát"
-                />
+                android:textSize="16dp" />
+
 
         </LinearLayout>
-
 
 
     </LinearLayout>

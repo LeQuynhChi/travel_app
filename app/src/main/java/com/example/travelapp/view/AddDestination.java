@@ -1,6 +1,7 @@
 package com.example.travelapp.view;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,50 +10,131 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.travelapp.R;
+import com.example.travelapp.Utils.RealPathUtil;
+import com.example.travelapp.model.Destination;
+import com.example.travelapp.network.RestApiService;
+import com.example.travelapp.network.RetrofitInstance;
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AddDestination extends AppCompatActivity {
 
     ImageView btnArrowBack ;
-    Button btnBack , buttonAddImageDestination, saveLocation;
+    Button btnBack , buttonAddImageDestination;
+
 
 
     TextView editTextLocationName, textLocationDescription;
 
     Spinner  spinnerLocationType ,spinnerLocationProvince, spinnerLocationDistrict;
 
-
     ImageView imageViewLocation;
-
+    ProgressDialog progressDialog;
+    String name ,desc,district , province,type ,imageName ;
+    Uri imageUri;
+    private static final int PICK_IMAGE_REQUEST = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        editTextLocationName = findViewById(R.id.editTextLocationName);
+        textLocationDescription = findViewById(R.id.editTextLocationDesc);
+        spinnerLocationDistrict = findViewById(R.id.spinnerLocationDistrict);
+        spinnerLocationProvince = findViewById(R.id.spinnerLocationProvince);
+        spinnerLocationType = findViewById(R.id.spinnerLocationType);
+        imageViewLocation = findViewById(R.id.imageViewLocation);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please await...");
         setContentView(R.layout.add_location);
+//        onClickAddLocationBtn();
         innitSpinner();
         innitSpinnerDistrict();
         innitSpinnerProvince();
         onClickBackAddLocationArr();
         onClickBackAddLocationBtn();
         onClickAddImageLocationBtn();
-        onClickAddLocationBtn();
+    }
+
+    public  void  saveData(View v){
+        editTextLocationName = findViewById(R.id.editTextLocationName);
+        textLocationDescription = findViewById(R.id.editTextLocationDesc);
+        spinnerLocationDistrict = findViewById(R.id.spinnerLocationDistrict);
+        spinnerLocationProvince = findViewById(R.id.spinnerLocationProvince);
+        spinnerLocationType = findViewById(R.id.spinnerLocationType);
+        imageViewLocation = findViewById(R.id.imageViewLocation);
+
+        name =  editTextLocationName.getText().toString();
+        desc =  textLocationDescription.getText().toString();
+        district =  spinnerLocationDistrict.getSelectedItem().toString();
+        province =  spinnerLocationProvince.getSelectedItem().toString();
+        type =  spinnerLocationType.getSelectedItem().toString();
 
 
+        if(!name.isEmpty()&&! desc.isEmpty()&&!district.isEmpty()&&!province.isEmpty()&&!type.isEmpty()&&!imageName.isEmpty()){
+            RequestBody namePart = RequestBody.create(MediaType.parse("text/plain"), name);
+            RequestBody descPart = RequestBody.create(MediaType.parse("text/plain"), desc);
+            RequestBody provincePart = RequestBody.create(MediaType.parse("text/plain"), province);
+            RequestBody districtPart = RequestBody.create(MediaType.parse("text/plain"), district);
+            RequestBody typePart = RequestBody.create(MediaType.parse("text/plain"), type);
+            String imageRealUri = RealPathUtil.getRealPath(this , imageUri);
+            File avatarFile = new File(imageRealUri);
+            RequestBody avatarRequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), avatarFile);
+            MultipartBody.Part imagePart = MultipartBody.Part.createFormData("image", avatarFile.getName(), avatarRequestBody);
+
+            RestApiService apiService = RetrofitInstance.getApiService();
+            Call<Destination.Data> call = apiService.createDestination(namePart,descPart, provincePart, districtPart,typePart,imagePart);
+
+            call.enqueue(new Callback<Destination.Data>() {
+                @Override
+                public void onResponse(Call<Destination.Data> call, Response<Destination.Data> response) {
+                    if ( response.body() != null) {
+                        Toast.makeText(AddDestination.this, "Thêm địa điểm thành công", Toast.LENGTH_LONG).show();
+                        closeActivity();
+                    } else {
+                        Toast.makeText(AddDestination.this, "Vui lòng điền đầy dủ thông tin", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Destination.Data> call, Throwable t) {
+                    // Handle failure
+                    Toast.makeText(AddDestination.this, "Vui lòng điền đầy dủ thông tin shfgdhs", Toast.LENGTH_LONG).show();
+
+                }
+            });
+
+        }else {
+            Toast.makeText(AddDestination.this, "Vui lòng điền đầy dủ thông tin", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void innitSpinner() {
@@ -127,27 +209,54 @@ public class AddDestination extends AppCompatActivity {
             }
         });
     }
-    private void onClickAddLocationBtn() {
-        saveLocation = findViewById(R.id.saveLocation);
-        saveLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-    }
+
     private void onClickAddImageLocationBtn() {
         buttonAddImageDestination = findViewById(R.id.buttonAddImageDestination);
         buttonAddImageDestination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                openImagePicker();
             }
         });
+    }
+
+    private String getFileNameFromUri(Uri uri) {
+        String fileName = null;
+        String[] projection = {MediaStore.Images.Media.DISPLAY_NAME};
+
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME);
+            fileName = cursor.getString(columnIndex);
+            cursor.close();
+        }
+        return fileName;
+    }
+
+
+    private void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+            imageUri =selectedImageUri;
+            imageName = getFileNameFromUri(selectedImageUri);
+            imageViewLocation = findViewById(R.id.imageViewLocation);
+            imageViewLocation.setImageURI(selectedImageUri);
+        }
     }
 
     private  void closeActivity (){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
 
 }
