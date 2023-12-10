@@ -24,6 +24,8 @@ public class Hotel {
     public  static  class  Data {
         @SerializedName("name")
     private String name;
+        @SerializedName("_id")
+    private String id;
         @SerializedName("province")
 
     private String province;
@@ -38,14 +40,24 @@ public class Hotel {
         @SerializedName("price")
     private float price;
 
-        public Data(String name, String province, String district, String description, String type, String image, float price) {
+        public Data(String name, String id, String province, String district, String description, String type, String image, float price) {
             this.name = name;
+            this.id = id;
             this.province = province;
             this.district = district;
             this.description = description;
             this.type = type;
             this.image = image;
             this.price = price;
+        }
+
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
         }
 
         public String getPrice() {

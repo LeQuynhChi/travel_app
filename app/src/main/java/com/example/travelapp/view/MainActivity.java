@@ -185,4 +185,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.putExtra("id", itemId);
         startActivity(intent);
     }
+    public void onItemClickHotel(String itemId) {
+        // Handle item click, e.g., open detailed view or perform an action
+        Intent intent = new Intent(this, HotelDetailActivity.class);
+        intent.putExtra("id", itemId);
+        startActivity(intent);
+    }
 }

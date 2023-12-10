@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.travelapp.R;
 import com.example.travelapp.adapter.DestinationAdapter;
 import com.example.travelapp.adapter.HoltelAdapter;
+import com.example.travelapp.adapter.OnItemClickListener;
 import com.example.travelapp.model.Destination;
 import com.example.travelapp.model.Hotel;
 import com.example.travelapp.network.RestApiService;
@@ -60,12 +61,12 @@ public class HotelFragment extends Fragment {
         call.enqueue(new Callback<Hotel>() {
             @Override
             public void onResponse(Call<Hotel> call, Response<Hotel> response) {
-                adapter = new HoltelAdapter(getActivity(),response.body().getData());
+                adapter = new HoltelAdapter(getActivity(),response.body().getData(),(OnItemClickListener) requireActivity());
                 recyclerView.setAdapter(adapter);
             }
             @Override
             public void onFailure(Call<Hotel> call, Throwable t) {
-                System.out.println("sdhhgfdhs");
+//                System.out.println("sdhhgfdhs");
             }
         });
 

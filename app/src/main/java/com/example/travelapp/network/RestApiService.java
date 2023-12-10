@@ -20,6 +20,8 @@ public interface RestApiService {
 
     @GET("destination/get/{id}")
     Call<Destination.Data> getDestinationById(@Path("id") String id);
+    @GET("hotel/get/{id}")
+    Call<Hotel.Data> getHotelById(@Path("id") String id);
     @GET("hotel/all")
     Call<Hotel> getAllHotel();
 

@@ -20,10 +20,13 @@ public class HoltelAdapter extends RecyclerView.Adapter<HotelViewHolder> {
 
     private LayoutInflater inflater;
 
-    public HoltelAdapter(Context context, List<Hotel.Data> hotelList) {
+    private OnItemClickListener itemClickListener;
+
+    public HoltelAdapter(Context context, List<Hotel.Data> hotelList , OnItemClickListener itemClickListener) {
         this.context = context;
         this.hotelList = hotelList;
         this.inflater = LayoutInflater.from(context);
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -41,6 +44,16 @@ public class HoltelAdapter extends RecyclerView.Adapter<HotelViewHolder> {
         holder.txtHotelPrice.setText(item.getPrice());
         String imageUrl = "https://trimmap-ohte.onrender.com/img/"+item.getImage();
         Picasso.get().load(imageUrl).into(holder.imageView);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (itemClickListener != null) {
+                    itemClickListener.onItemClickHotel(item.getId());
+                }
+            }
+        });
+
     }
 
     @Override

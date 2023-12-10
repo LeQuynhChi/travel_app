@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.travelapp.R;
 
 public  class HotelViewHolder extends RecyclerView.ViewHolder {
-        public TextView textHotelName , txtHotelAddress ,txtHotelPrice;
+        public TextView textHotelName , txtHotelAddress ,txtHotelPrice ;
 
         public ImageView imageView;
 
