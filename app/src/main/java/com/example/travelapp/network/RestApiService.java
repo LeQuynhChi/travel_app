@@ -37,6 +37,17 @@ public interface RestApiService {
             @Part("type") RequestBody type,
             @Part MultipartBody.Part image
     );
+    @Multipart
+    @POST("hotel/create")
+    Call<Hotel.Data> createHotel(
+            @Part("name") RequestBody name,
+            @Part("description") RequestBody description,
+            @Part("province") RequestBody province,
+            @Part("district") RequestBody district,
+            @Part("type") RequestBody type,
+            @Part("price") RequestBody price,
+            @Part MultipartBody.Part image
+    );
     @GET("restaurant/all")
     Call<Restaurant> getAllRst();
 }
