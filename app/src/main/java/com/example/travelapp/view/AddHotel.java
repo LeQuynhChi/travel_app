@@ -50,8 +50,6 @@ public class AddHotel extends AppCompatActivity {
     ImageView imageViewHotel;
     String name ,desc,district , province,type ,imageName,price ;
 
-
-
     Uri imageUri;
     private static final int PICK_IMAGE_REQUEST = 1;
     @Override
@@ -75,13 +73,14 @@ public class AddHotel extends AppCompatActivity {
         onClickAddImageHotelBtn();
     }
 
-    public  void  saveData(View v){
-//        editTextLocationName = findViewById(R.id.editTextLocationName);
-//        textLocationDescription = findViewById(R.id.editTextLocationDesc);
-//        spinnerLocationDistrict = findViewById(R.id.spinnerLocationDistrict);
-//        spinnerLocationProvince = findViewById(R.id.spinnerLocationProvince);
-//        spinnerLocationType = findViewById(R.id.spinnerLocationType);
-//        imageViewLocation = findViewById(R.id.imageViewLocation);
+    public  void  saveDataHt(View v){
+        editTextHotelName = findViewById(R.id.editTextHotelName);
+        editTextHotelPrice  = findViewById(R.id.editTextHotelPrice);
+        textHotelDescription = findViewById(R.id.editTextHotelDesc);
+        spinnerHotelDistrict = findViewById(R.id.spinnerHotelDistrict);
+        spinnerHotelProvince = findViewById(R.id.spinnerHotelProvince);
+        spinnerHotelType = findViewById(R.id.spinnerHotelType);
+        imageViewHotel   = findViewById(R.id.imageViewHotel);
 
         name =  editTextHotelName.getText().toString();
         price =  editTextHotelPrice.getText().toString();

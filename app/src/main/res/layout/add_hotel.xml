@@ -210,8 +210,8 @@
             >
 
             <Button
-                android:onClick="saveData"
-                android:id="@+id/addLocation"
+                android:onClick="saveDataHt"
+                android:id="@+id/addHotel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
