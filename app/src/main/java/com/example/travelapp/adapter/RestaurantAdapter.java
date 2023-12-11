@@ -9,25 +9,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.travelapp.R;
-import com.example.travelapp.model.Hotel;
 import com.example.travelapp.model.Restaurant;
-import com.example.travelapp.viewHoder.HotelViewHolder;
 import com.example.travelapp.viewHoder.RestaurantViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantViewHolder> {
-    private List<Restaurant.Data> resList;
+    private List<Restaurant.Data> restaurantList;
     private Context context;
 
     private LayoutInflater inflater;
-
     private OnItemClickListener itemClickListener;
 
-    public RestaurantAdapter(Context context, List<Restaurant.Data> resList , OnItemClickListener itemClickListener) {
+    public RestaurantAdapter(Context context, List<Restaurant.Data> restaurantList , OnItemClickListener itemClickListener) {
         this.context = context;
-        this.resList = resList;
+        this.restaurantList = restaurantList;
         this.inflater = LayoutInflater.from(context);
         this.itemClickListener = itemClickListener;
     }
@@ -35,18 +32,20 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantViewHolder
     @NonNull
     @Override
     public RestaurantViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.rcv_hotel_item, parent, false);
+        View view = inflater.inflate(R.layout.rcv_restaurant_item, parent, false);
         return new RestaurantViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
-        Restaurant.Data item = resList.get(position);
-//        holder.textHotelName.setText(item.getName());
-//        holder.txtHotelAddress.setText(item.getProvince());
-//        holder.txtHotelPrice.setText(item.getPrice());
-//        String imageUrl = "https://trimmap-ohte.onrender.com/img/"+item.getImage();
-//        Picasso.get().load(imageUrl).into(holder.imageView);
+        final Restaurant.Data item = restaurantList.get(position);
+
+//        holder..setText(item.getImage());
+        holder.editTextRestaurantName.setText(item.getName());
+//        holder.textViewProvince.setText(item.getProvince());
+        String imageUrl = "https://trimmap-ohte.onrender.com/img/"+item.getImage();
+        Picasso.get().load(imageUrl).into(holder.imageRestaurant);
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +60,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantViewHolder
 
     @Override
     public int getItemCount() {
-        return resList.size();
+        return restaurantList.size();
     }
 
 }

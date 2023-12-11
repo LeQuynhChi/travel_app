@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void onItemClickRestaurant(String itemId) {
         // Handle item click, e.g., open detailed view or perform an action
-        Intent intent = new Intent(this, HotelDetailActivity.class);
+        Intent intent = new Intent(this, RstDetailActivity.class);
         intent.putExtra("id", itemId);
         startActivity(intent);
     }
