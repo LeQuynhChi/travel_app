@@ -2,6 +2,7 @@ package com.example.travelapp.network;
 
 import com.example.travelapp.model.Destination;
 import com.example.travelapp.model.Hotel;
+import com.example.travelapp.model.Restaurant;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -36,4 +37,6 @@ public interface RestApiService {
             @Part("type") RequestBody type,
             @Part MultipartBody.Part image
     );
+    @GET("restaurant/all")
+    Call<Restaurant> getAllRst();
 }
