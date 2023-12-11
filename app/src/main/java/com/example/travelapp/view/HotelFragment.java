@@ -36,20 +36,20 @@ public class HotelFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.data_hotel);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-//        openViewAddHotel(view);
+        openViewAddHotel(view);
         fetchListHotel();
         return view;
     }
 
 
     public  void  openViewAddHotel(View view){
-        Button openAddLocationView = view.findViewById(R.id.openAddLocationView);
+        Button openViewHotel = view.findViewById(R.id.openViewHotel);
 
         // Now you can work with the Button as needed
-        openAddLocationView.setOnClickListener(new View.OnClickListener() {
+        openViewHotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(requireActivity(), AddDestination.class);
+                Intent intent = new Intent(requireActivity(), AddHotel.class);
                 startActivity(intent);
             }
         });
@@ -71,4 +71,5 @@ public class HotelFragment extends Fragment {
         });
 
     }
+
 }
