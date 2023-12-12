@@ -50,6 +50,14 @@ public interface RestApiService {
             @Part("price") RequestBody price,
             @Part MultipartBody.Part image
     );
+    @Multipart
+    @POST("restaurant/create")
+    Call<Restaurant.Data> createRst(
+            @Part("name") RequestBody name,
+            @Part("description") RequestBody description,
+            @Part("address") RequestBody address,
+            @Part MultipartBody.Part image
+    );
     @GET("restaurant/all")
     Call<Restaurant> getAllRst();
 }

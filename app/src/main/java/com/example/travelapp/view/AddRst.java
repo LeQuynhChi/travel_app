@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.travelapp.R;
 import com.example.travelapp.Utils.RealPathUtil;
 import com.example.travelapp.model.Destination;
+import com.example.travelapp.model.Restaurant;
 import com.example.travelapp.network.RestApiService;
 import com.example.travelapp.network.RetrofitInstance;
 
@@ -38,72 +39,56 @@ import retrofit2.Response;
 public class AddRst extends AppCompatActivity {
 
     ImageView btnArrowBack ;
-    Button btnBack , buttonAddImageDestination;
+    Button btnBack , buttonAddImageRst;
 
 
 
-    TextView editTextLocationName, textLocationDescription;
+    TextView editTextRstName, textRstDescription, editTextRstAddress ;
 
-    Spinner  spinnerLocationType ,spinnerLocationProvince, spinnerLocationDistrict;
 
-    ImageView imageViewLocation;
-    ProgressDialog progressDialog;
-    String name ,desc,district , province,type ,imageName ;
+    ImageView imageViewRst;
+    String name ,desc,address , imageName ;
     Uri imageUri;
     private static final int PICK_IMAGE_REQUEST = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        editTextLocationName = findViewById(R.id.editTextLocationName);
-        textLocationDescription = findViewById(R.id.editTextLocationDesc);
-        spinnerLocationDistrict = findViewById(R.id.spinnerLocationDistrict);
-        spinnerLocationProvince = findViewById(R.id.spinnerLocationProvince);
-        spinnerLocationType = findViewById(R.id.spinnerLocationType);
-        imageViewLocation = findViewById(R.id.imageViewLocation);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please await...");
-        setContentView(R.layout.add_location);
-//        onClickAddLocationBtn();
-        innitSpinner();
-        innitSpinnerDistrict();
-        innitSpinnerProvince();
+
+        setContentView(R.layout.add_restaurant);
         onClickBackAddLocationArr();
         onClickBackAddLocationBtn();
         onClickAddImageLocationBtn();
     }
 
-    public  void  saveData(View v){
-        editTextLocationName = findViewById(R.id.editTextLocationName);
-        textLocationDescription = findViewById(R.id.editTextLocationDesc);
-        spinnerLocationDistrict = findViewById(R.id.spinnerLocationDistrict);
-        spinnerLocationProvince = findViewById(R.id.spinnerLocationProvince);
-        spinnerLocationType = findViewById(R.id.spinnerLocationType);
-        imageViewLocation = findViewById(R.id.imageViewLocation);
+    public  void  saveDataRst(View v){
+        editTextRstName = findViewById(R.id.editTextRstName);
+        textRstDescription = findViewById(R.id.editTextRstDesc);
+        editTextRstAddress = findViewById(R.id.editTextRstAddress);
 
-        name =  editTextLocationName.getText().toString();
-        desc =  textLocationDescription.getText().toString();
-        district =  spinnerLocationDistrict.getSelectedItem().toString();
-        province =  spinnerLocationProvince.getSelectedItem().toString();
-        type =  spinnerLocationType.getSelectedItem().toString();
+        imageViewRst = findViewById(R.id.imageViewRst);
+
+        name =  editTextRstName.getText().toString();
+        desc =  textRstDescription.getText().toString();
+        address =  editTextRstAddress.getText().toString();
 
 
-        if(!name.isEmpty()&&! desc.isEmpty()&&!district.isEmpty()&&!province.isEmpty()&&!type.isEmpty()&&!imageName.isEmpty()){
+
+        if(!name.isEmpty()&&! desc.isEmpty()&&!address.isEmpty()){
             RequestBody namePart = RequestBody.create(MediaType.parse("text/plain"), name);
             RequestBody descPart = RequestBody.create(MediaType.parse("text/plain"), desc);
-            RequestBody provincePart = RequestBody.create(MediaType.parse("text/plain"), province);
-            RequestBody districtPart = RequestBody.create(MediaType.parse("text/plain"), district);
-            RequestBody typePart = RequestBody.create(MediaType.parse("text/plain"), type);
+            RequestBody addressPart = RequestBody.create(MediaType.parse("text/plain"), address);
+
             String imageRealUri = RealPathUtil.getRealPath(this , imageUri);
             File avatarFile = new File(imageRealUri);
             RequestBody avatarRequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), avatarFile);
             MultipartBody.Part imagePart = MultipartBody.Part.createFormData("image", avatarFile.getName(), avatarRequestBody);
 
             RestApiService apiService = RetrofitInstance.getApiService();
-            Call<Destination.Data> call = apiService.createDestination(namePart,descPart, provincePart, districtPart,typePart,imagePart);
+            Call<Restaurant.Data> call = apiService.createRst(namePart,descPart,addressPart,imagePart);
 
-            call.enqueue(new Callback<Destination.Data>() {
+            call.enqueue(new Callback<Restaurant.Data>() {
                 @Override
-                public void onResponse(Call<Destination.Data> call, Response<Destination.Data> response) {
+                public void onResponse(Call<Restaurant.Data> call, Response<Restaurant.Data> response) {
                     if ( response.body() != null) {
                         Toast.makeText(AddRst.this, "Thêm địa điểm thành công", Toast.LENGTH_LONG).show();
                         closeActivity();
@@ -113,7 +98,7 @@ public class AddRst extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<Destination.Data> call, Throwable t) {
+                public void onFailure(Call<Restaurant.Data> call, Throwable t) {
                     // Handle failure
                     Toast.makeText(AddRst.this, "Vui lòng điền đầy dủ thông tin shfgdhs", Toast.LENGTH_LONG).show();
 
@@ -125,62 +110,10 @@ public class AddRst extends AppCompatActivity {
         }
     }
 
-    public void innitSpinner() {
-        spinnerLocationType = findViewById(R.id.spinnerLocationType);
-        List<String> spinnerData = new ArrayList<>();
-        spinnerData.add("Chùa Dền");
-        spinnerData.add("Phong cảnh");
-        spinnerData.add("Khu vui chơi");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerData);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLocationType.setAdapter(adapter);
 
-    }
-    public void innitSpinnerProvince() {
-        spinnerLocationProvince = findViewById(R.id.spinnerLocationProvince);
-        List<String> provinceList = Arrays.asList(
-                "Hà Nội", "Hồ Chí Minh", "Đà Nẵng", "Hải Phòng", "Quảng Ninh", "Thái Bình",
-                "Bắc Ninh", "Hải Dương", "Hà Nam", "Nam Định", "Ninh Bình", "Thanh Hóa",
-                "Nghệ An", "Hà Tĩnh", "Quảng Bình", "Quảng Trị", "Thừa Thiên Huế", "Quảng Nam",
-                "Quảng Ngãi", "Bình Định", "Phú Yên", "Khánh Hòa", "Ninh Thuận", "Bình Thuận",
-                "Kon Tum", "Gia Lai", "Đắk Lắk", "Đắk Nông", "Lâm Đồng", "Bà Rịa - Vũng Tàu",
-                "Bình Phước", "Bình Dương", "Đồng Nai", "Tây Ninh", "Long An", "Tiền Giang",
-                "Bến Tre", "Trà Vinh", "Vĩnh Long", "Đồng Tháp", "An Giang", "Kiên Giang",
-                "Cần Thơ", "Hậu Giang", "Sóc Trăng", "Bạc Liêu", "Cà Mau", "Lào Cai",
-                "Yên Bái", "Lạng Sơn", "Quảng Ninh", "Bắc Giang", "Phú Thọ", "Vĩnh Phúc",
-                "Bắc Ninh", "Hải Dương", "Hưng Yên", "Thái Bình", "Hà Nam", "Nam Định",
-                "Ninh Bình", "Thanh Hóa"
-                // Thêm các tỉnh thành khác tương ứng với 64 tỉnh thành Việt Nam
-        );
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, provinceList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLocationProvince.setAdapter(adapter);
-
-    }
-
-
-    public void innitSpinnerDistrict() {
-        spinnerLocationDistrict = findViewById(R.id.spinnerLocationDistrict);
-        List<String> districts = Arrays.asList(
-                "Ba Đình", "Hoàn Kiếm", "Hai Bà Trưng", "Đống Đa", "Tây Hồ",
-                "Cầu Giấy", "Thanh Xuân", "Hoàng Mai", "Long Biên", "Bắc Từ Liêm",
-                "Nam Từ Liêm", "Hà Đông", "Thanh Trì", "Sơn Tây", "Ba Vì",
-                "Phúc Thọ", "Thạch Thất", "Quốc Oai", "Chương Mỹ", "Đan Phượng",
-                "Hoài Đức", "Thanh Oai", "Mỹ Đức", "Ứng Hòa", "Thường Tín", "Phú Xuyên",
-                "Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7",
-                "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12", "Bình Tân",
-                "Bình Thạnh", "Gò Vấp", "Phú Nhuận", "Tân Bình", "Tân Phú", "Thủ Đức",
-                "Bình Chánh", "Cần Giờ", "Củ Chi", "Hóc Môn", "Nhà Bè"
-        );
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, districts);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLocationDistrict.setAdapter(adapter);
-
-    }
 
     private void onClickBackAddLocationArr() {
-        btnArrowBack = findViewById(R.id.location_arrow_back);
+        btnArrowBack = findViewById(R.id.RstArrowBack);
         btnArrowBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,8 +132,8 @@ public class AddRst extends AppCompatActivity {
     }
 
     private void onClickAddImageLocationBtn() {
-        buttonAddImageDestination = findViewById(R.id.buttonAddImageDestination);
-        buttonAddImageDestination.setOnClickListener(new View.OnClickListener() {
+        buttonAddImageRst = findViewById(R.id.buttonAddImageRst);
+        buttonAddImageRst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openImagePicker();
@@ -236,8 +169,8 @@ public class AddRst extends AppCompatActivity {
             Uri selectedImageUri = data.getData();
             imageUri =selectedImageUri;
             imageName = getFileNameFromUri(selectedImageUri);
-            imageViewLocation = findViewById(R.id.imageViewLocation);
-            imageViewLocation.setImageURI(selectedImageUri);
+            imageViewRst = findViewById(R.id.imageViewRst);
+            imageViewRst.setImageURI(selectedImageUri);
         }
     }
 

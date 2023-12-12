@@ -1,9 +1,11 @@
 package com.example.travelapp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,12 +37,25 @@ public class RestaurantFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.data_restaurant);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-//        openViewAddHotel(view);
+        openViewAddRst(view);
         fetchListRst();
         return view;
 
     }
 
+
+    public  void  openViewAddRst(View view){
+        Button openAddResView = view.findViewById(R.id.openAddResView);
+
+        // Now you can work with the Button as needed
+        openAddResView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), AddRst.class);
+                startActivity(intent);
+            }
+        });
+    }
 
     private  void  fetchListRst(){
         RestApiService apiService = RetrofitInstance.getApiService();
