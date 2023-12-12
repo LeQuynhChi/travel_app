@@ -12,11 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.travelapp.R;
-import com.example.travelapp.adapter.DestinationAdapter;
-import com.example.travelapp.adapter.HoltelAdapter;
 import com.example.travelapp.adapter.OnItemClickListener;
 import com.example.travelapp.adapter.RestaurantAdapter;
-import com.example.travelapp.model.Destination;
 import com.example.travelapp.model.Restaurant;
 import com.example.travelapp.network.RestApiService;
 import com.example.travelapp.network.RetrofitInstance;
@@ -40,7 +37,6 @@ public class RestaurantFragment extends Fragment {
         return view;
 
     }
-
 
     private  void  fetchListRst(){
         RestApiService apiService = RetrofitInstance.getApiService();
