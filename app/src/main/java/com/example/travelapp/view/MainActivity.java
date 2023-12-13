@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.travelapp.R;
 import com.example.travelapp.adapter.DestinationAdapter;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigation_view;
     Toolbar toolbar;
     FrameLayout content_frame;
+
 
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_LOCATION = 1;
