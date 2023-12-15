@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.travelapp.R;
 import com.example.travelapp.adapter.DestinationAdapter;
@@ -24,7 +25,9 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , OnItemClickListener {
 
-    ImageView btn_location,btn_restaurant,btn_hotel;
+    ImageView btn_location,btn_restaurant,btn_hotel , btn_search;
+
+    TextView keyword;
     DrawerLayout drawer_layout;
     NavigationView navigation_view;
     Toolbar toolbar;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int FRAGMENT_LOCATION = 1;
     private static final int FRAGMENT_RESTAURANT = 2;
     private static final int FRAGMENT_HOTEL= 3;
+    private static final int FRAGMENT_SEARCH= 4;
     private int currentFragment = FRAGMENT_LOCATION;
 
     @Override
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         onClickLocation();
         onClickHotel();
         onClickRestaurant();
+        onClickSearch();
 
         // bắt sự kiện khi click các item trong navigationBar_menu
         navigation_view.setNavigationItemSelectedListener(this);
@@ -81,6 +86,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(new HotelFragment());
                 currentFragment = FRAGMENT_HOTEL;
                 setClickColor(view);
+            }
+        });
+    }
+
+    private void onClickSearch() {
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(keyword.getText().toString().isEmpty()== false){
+                SearchFragment f = new SearchFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("keyword", keyword.getText().toString());
+                f.setArguments(bundle);
+                replaceFragment(f);
+                currentFragment = FRAGMENT_SEARCH;
+                setClickColor(view);
+                }
             }
         });
     }
@@ -178,6 +201,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = findViewById(R.id.toolbar);
         navigation_view = findViewById(R.id.navigation_view);
         content_frame = findViewById(R.id.content_frame);
+        btn_search = findViewById(R.id.btn_search);
+        keyword = findViewById(R.id.keyword);
     }
 
     @Override
