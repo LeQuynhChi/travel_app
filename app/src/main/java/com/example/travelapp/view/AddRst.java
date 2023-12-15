@@ -122,7 +122,7 @@ public class AddRst extends AppCompatActivity {
         });
     }
     private void onClickBackAddLocationBtn() {
-        btnBack = findViewById(R.id.backAddLocation);
+        btnBack = findViewById(R.id.backAddRst);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

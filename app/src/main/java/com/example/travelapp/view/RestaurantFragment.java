@@ -44,11 +44,11 @@ public class RestaurantFragment extends Fragment {
     }
 
 
-    public  void  openViewAddRst(View view){
-        Button openAddResView = view.findViewById(R.id.openAddResView);
+    public  void openViewAddRst (View view){
+        Button openViewRst = view.findViewById(R.id.openAddResView);
 
         // Now you can work with the Button as needed
-        openAddResView.setOnClickListener(new View.OnClickListener() {
+        openViewRst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(requireActivity(), AddRst.class);
@@ -56,6 +56,7 @@ public class RestaurantFragment extends Fragment {
             }
         });
     }
+
 
     private  void  fetchListRst(){
         RestApiService apiService = RetrofitInstance.getApiService();
